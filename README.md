@@ -1,11 +1,11 @@
 # Vy Vo – Applied AI Portfolio
-**Houston Community College · Applied AI & Robotics Program**
+**Houston City College · Applied AI & Robotics Program**
 
 ---
 
 ## About Me
 
-I am an Applied AI student at Houston Community College specializing in computer vision and machine learning. This portfolio showcases my hands-on project work across the Applied AI & Robotics program, where I built end-to-end AI systems — from raw image datasets to trained, evaluated deep learning models. I am passionate about applying AI to solve problems in healthcare and financial security.
+I am an Applied AI student at Houston City College specializing in computer vision and machine learning. This portfolio showcases my hands-on project work across the Applied AI & Robotics program, where I built end-to-end AI systems — from raw image datasets to trained, evaluated deep learning models. I am passionate about applying AI to solve problems in healthcare and financial security.
 
 ---
 
@@ -76,7 +76,7 @@ Vy-Vo-AI-Portfolio/
 #### [Fake Currency Detector](./ComputerVision-ITAI1378/Fake-Currency-Detector/)
 Built a binary image classifier to detect real vs. counterfeit banknotes, helping small businesses protect themselves from financial loss without expensive hardware.
 - **Model:** ResNet50 fine-tuned via transfer learning (ImageNet weights)
-- **Dataset:** [Kaggle – Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data) · Labels: `real`, `fake`
+- **Dataset:** [Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data) · Labels: `real`, `fake`
 - **Key techniques:** Data augmentation, Dropout, AdamW, cosine annealing LR, early stopping
 - **Technologies:** Python · PyTorch · Torchvision · scikit-learn · matplotlib · Pillow
 
