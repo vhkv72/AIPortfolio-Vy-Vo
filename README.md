@@ -1,7 +1,7 @@
 # 💵 Fake Currency Detector
 
 **Course:** ITAI 1378 – Computer Vision  
-**Student:** Vy Vo | Houston Community College  
+**Student:** Vy Vo | Houston City College  
 **Project Tier:** Tier 1
 
 ---
@@ -23,7 +23,7 @@ Counterfeit money causes significant financial losses for businesses and individ
 
 ## Dataset
 
-- **Source:** [Kaggle – Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data)
+- **Source:** [Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data)
 - **Labels:** `real`, `fake`
 - **Note:** Download the dataset from Kaggle and place it as:
   ```
