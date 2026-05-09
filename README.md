@@ -1,11 +1,11 @@
 # Vy Vo – Applied AI Portfolio
-**Houston Community College · Applied AI & Robotics Program**
+**Houston City College · Applied AI & Robotics Program**
 
 ---
 
 ## About Me
 
-I am an Applied AI student at Houston Community College specializing in computer vision and machine learning. This portfolio showcases my hands-on project work across the Applied AI & Robotics program, where I built end-to-end AI systems — from raw image datasets to trained, evaluated deep learning models. I am passionate about applying AI to solve problems in healthcare and financial security.
+I am an Applied AI student at Houston City College specializing in computer vision and machine learning. This portfolio showcases my hands-on project work across the Applied AI & Robotics program, where I built end-to-end AI systems — from raw image datasets to trained, evaluated deep learning models. I am passionate about applying AI to solve problems in healthcare and financial security.
 
 ---
 
@@ -76,14 +76,14 @@ Vy-Vo-AI-Portfolio/
 #### [Fake Currency Detector](./ComputerVision-ITAI1378/Fake-Currency-Detector/)
 Built a binary image classifier to detect real vs. counterfeit banknotes, helping small businesses protect themselves from financial loss without expensive hardware.
 - **Model:** ResNet50 fine-tuned via transfer learning (ImageNet weights)
-- **Dataset:** [Kaggle – Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data) · Labels: `real`, `fake`
+- **Dataset:** [Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data) · Labels: `real`, `fake`
 - **Key techniques:** Data augmentation, Dropout, AdamW, cosine annealing LR, early stopping
 - **Technologies:** Python · PyTorch · Torchvision · scikit-learn · matplotlib · Pillow
 
 #### [Eye Disease Classifier](./ComputerVision-ITAI1378/Eye-Disease-Classifier/)
 Built a 4-class retinal image classifier to detect AMD, Cataract, Diabetic Retinopathy, and Normal eyes from fundus photographs — supporting early diagnosis of vision-threatening conditions.
 - **Model:** ResNet18 with Dropout (p=0.4) before the final linear layer
-- **Dataset:** AMDNet23 Fundus Image Dataset · 4 classes: `amd`, `cataract`, `diabetes`, `normal`
+- **Dataset:** [Macular Degeneration Disease Dataset](https://www.kaggle.com/datasets/orvile/macular-degeneration-disease-dataset) · 4 classes: `amd`, `cataract`, `diabetes`, `normal`
 - **Key techniques:** Transfer learning, per-class accuracy analysis, confusion matrix evaluation
 - **Technologies:** Python · PyTorch · Torchvision · matplotlib · NumPy
 
@@ -91,10 +91,10 @@ Built a 4-class retinal image classifier to detect AMD, Cataract, Diabetic Retin
 
 ### 🟢 Machine Learning (ITAI 1371)
 
-#### [Student Performance Predictor](./MachineLearning-ITAI1371/Student-Performance-Predictor/)
+#### [Student Performance Classifier](./MachineLearning-ITAI1371/Student-Performance-Predictor/)
 Predicted student final grade categories from 14,003 records using 14 behavioral and demographic features, enabling educators to identify at-risk learners before they fall behind.
 - **Model:** Random Forest Classifier with `RandomizedSearchCV` (12 candidates, 3-fold CV)
-- **Dataset:** `student_performance.csv` · 14,003 records · 16 features
+- **Dataset:** [Student Performance and Learning Behavior Dataset](https://www.kaggle.com/datasets/adilshamim8/student-performance-and-learning-style) · 14,003 records · 16 features
 - **Key techniques:** ColumnTransformer pipeline, One-Hot Encoding, feature importance analysis
 - **Technologies:** Python · scikit-learn · pandas · matplotlib · seaborn
 
@@ -110,6 +110,4 @@ Predicted student final grade categories from 14,003 records using 14 behavioral
 
 ## Contact
 
-- **GitHub:** [github.com/VyVo](https://github.com/VyVo)
-- **LinkedIn:** [linkedin.com/in/vy-vo](https://linkedin.com/in/vy-vo)
-- **Email:** vy.vo@student.hccs.edu
+- **LinkedIn:** [linkedin.com/in/vy-vo](https://www.linkedin.com/in/vy-v-25a8a026b/)
