@@ -1,182 +1,178 @@
-# 👁️ Macular Degeneration Disease Classifier
+# 🎓 Student Performance & Learning Predictor
 
-**Course:** *ITAI 1378*  
+**Course:** ITAI 1378
+
 **Student:** Vy Vo | Houston City College
 
 ---
 
 ## Problem Statement
 
-Age-related Macular Degeneration (AMD) is a leading cause of vision loss affecting **196 million people worldwide**. Early detection from retinal fundus images can significantly improve patient outcomes. This project builds an automated deep learning classifier that identifies four retinal conditions — AMD, Cataract, Diabetic Retinopathy, and Normal — from fundus images using transfer learning.
+Student academic success depends on many overlapping factors — how much a student studies, whether they show up to class, their stress levels, and more. Early identification of at-risk students allows educators to provide targeted support before it's too late.
+
+This project builds a machine learning classifier that predicts a student's **final academic grade** (0–3) using 14 behavioral, motivational, and demographic features — with no access to their exam score. The goal is not just accurate prediction, but understanding *which factors matter most* so that insights can be acted on.
 
 ---
 
 ## Approach
 
 | Component | Choice |
-|-----------|--------|
-| CV Technique | Image Classification |
-| Model | ResNet-18 (pretrained on ImageNet) |
-| Framework | PyTorch + TorchVision |
-| Compute | Local (Mac M-series, MPS GPU) |
-| Regularization | Dropout (p=0.4) + Data Augmentation |
-| Training Strategy | Transfer Learning + Early Stopping |
+|---|---|
+| ML Technique | Multi-class Classification (4 classes) |
+| Model | Random Forest Classifier |
+| Framework | scikit-learn |
+| Hyperparameter Tuning | RandomizedSearchCV + StratifiedKFold (3-fold) |
+| Compute | Local — VS Code + Python virtual environment |
+
+**Why Random Forest?**
+Random Forest was chosen because it handles non-linear relationships between features, is robust to mixed feature types (numeric + ordinal), and provides built-in feature importance scores — directly supporting the goal of understanding what drives grades.
+
+**Pipeline design:**
+A scikit-learn `Pipeline` bundles preprocessing and the model together so the saved `.pkl` file can make predictions on raw data without any separate preprocessing step.
+
+```
+Raw CSV
+  → Drop ExamScore (leakage prevention)
+  → Train / Test Split (80/20, stratified)
+  → ColumnTransformer (median imputation + OneHotEncoding)
+  → RandomForestClassifier
+  → RandomizedSearchCV (12 candidates)
+  → Evaluate → Save model + plots
+```
 
 ---
 
 ## Dataset
 
-- **Source:** https://www.kaggle.com/datasets/orvile/macular-degeneration-disease-dataset
-- **Name:** AMDNet23 Fundus Image Dataset for Age-Related Macular Degeneration Disease Detection
-- **Total Images:** 1,994 retinal fundus photographs
-- **Labels:** AMD, Cataract, Diabetes (Diabetic Retinopathy), Normal
-- **Split:** 1,594 train / 400 validation (80/20)
-- **Class Distribution:**
+- **Source:** [Student Performance and Learning Behavior Dataset — Kaggle](https://www.kaggle.com/datasets/adilshamim8/student-performance-and-learning-style)
+- **Size:** 14,003 rows × 16 columns, zero missing values
+- **Features:** StudyHours, Attendance, AssignmentCompletion, Age, OnlineCourses, LearningStyle, StressLevel, Motivation, Resources, Gender, Internet, Extracurricular, Discussions, EduTech
+- **Target:** `FinalGrade` — ordinal label (0 = highest, 3 = lowest)
+- **Key decision:** `ExamScore` was dropped before training. It is a direct numeric encoding of `FinalGrade` (r = −0.97) and would cause data leakage, making the task trivially easy but meaningless.
 
-| Class | Train | Validation |
-|-------|-------|------------|
-| AMD | 394 | 100 |
-| Cataract | 400 | 100 |
-| Diabetes | 400 | 100 |
-| Normal | 400 | 100 |
-
-> **Note:** Dataset not uploaded to GitHub. Download from the Kaggle link above.
+> The dataset is not uploaded to GitHub due to size. Download it from the Kaggle link above and pass the path via `--data-path`.
 
 ---
 
 ## How to Run
 
-1. Clone this repository
-2. Download the dataset from the Kaggle link above and unzip it
-3. Install dependencies:
-   ```bash
-   pip3 install torch torchvision
-   ```
-4. Train the model:
-   ```bash
-   python3 train.py
-   ```
-5. Run predictions on validation images:
-   ```bash
-   python3 predict.py
-   ```
-6. Generate confusion matrix:
-   ```bash
-   pip3 install matplotlib
-   python3 confusion.py
-   ```
+**Requirements:** Python 3.9+
+
+```bash
+# 1. Clone the repo and navigate to this project folder
+cd Projects/MidTerm\ Project
+
+# 2. Create a virtual environment and install dependencies
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# 3. Run full pipeline with hyperparameter tuning (recommended)
+python student_performance_train.py --data-path path/to/student_performance.csv
+
+# 4. Or skip tuning for a faster run
+python student_performance_train.py --data-path path/to/student_performance.csv --no-tuning
+```
+
+Outputs are saved to `artifacts/`:
+```
+artifacts/
+├── student_performance_model.pkl   # Trained pipeline — ready for inference
+├── eda_overview.png                # Class distribution + correlation heatmap
+├── confusion_matrix.png            # Predicted vs. true grades on test set
+└── feature_importance.png          # Top 15 features by importance
+```
 
 ---
 
 ## Results
 
 | Metric | Value |
-|--------|-------|
-| Best Validation Accuracy | **98.2%** |
-| Train Accuracy (at best epoch) | 97.4% |
-| Train/Val Gap (overfitting) | 0.8% |
-| Best Epoch | 8 / 20 (early stopping) |
+|---|---|
+| **Test Accuracy** | **87.0%** |
+| Baseline (majority class) | 27.4% |
+| Lift over baseline | +59.6 percentage points |
+| Macro Precision | 87.0% |
+| Macro Recall | 87.0% |
+| Macro F1-Score | 87.0% |
 
-### Per-Class Performance
+**Per-class breakdown:**
 
-| Class | Correct | Errors | Accuracy |
-|-------|---------|--------|----------|
-| AMD | 99/100 | 1 | **99.0%** |
-| Cataract | 99/100 | 1 | **99.0%** |
-| Diabetes | 97/100 | 3 | **97.0%** |
-| Normal | 98/100 | 2 | **98.0%** |
+| Grade | Precision | Recall | F1-Score | Support |
+|---|---|---|---|---|
+| 0 (highest) | 86.9% | 87.1% | 87.0% | 766 |
+| 1 | 87.3% | 85.1% | 86.2% | 662 |
+| 2 | 88.3% | 89.2% | 88.7% | 724 |
+| 3 (lowest) | 85.7% | 86.6% | 86.1% | 649 |
 
-> The small confusion between Diabetes and Normal is clinically expected — early diabetic retinopathy can present subtly and resemble a healthy retina.
+Performance is consistent across all four grade classes — the model does not favor any particular group. Remaining errors are almost entirely between **adjacent grade classes** (e.g., predicting Grade 1 when the true label is Grade 0), which is the expected failure mode for an ordinal target.
 
 ---
 
-## Model Architecture
+## Key Findings
 
-```
-ResNet-18 (pretrained on ImageNet)
-    └── All convolutional layers (frozen feature extractor)
-    └── FC layer replaced with:
-            Dropout(p=0.4)
-            Linear(512 → 4 classes)
-```
+**The top 5 features drive the majority of predictive signal:**
 
-### Training Configuration
+| Rank | Feature | Importance |
+|---|---|---|
+| 1 | AssignmentCompletion | ~15% |
+| 2 | Attendance | ~14.5% |
+| 3 | OnlineCourses | ~13.5% |
+| 4 | StudyHours | ~13% |
+| 5 | Age | ~11% |
 
-| Parameter | Value |
-|-----------|-------|
-| Optimizer | Adam |
-| Learning Rate | 0.0001 |
-| Loss Function | CrossEntropyLoss |
-| Batch Size | 32 |
-| Max Epochs | 20 (early stopping patience=3) |
-| Input Size | 224 x 224 |
+The three most actionable findings:
+- **Completing assignments matters most.** It's the single strongest predictor — more than attendance or raw study hours.
+- **Showing up is second.** Attendance is nearly as important as assignment completion and more controllable than demographic factors.
+- **Internet access, extracurriculars, and discussions barely matter.** These features had near-zero importance, suggesting they don't meaningfully differentiate grade outcomes in this dataset.
+- **Individual feature correlations are misleading.** Each feature alone has |r| < 0.05 with FinalGrade, yet the model reaches 87% accuracy by learning *combinations* — a clear case where a correlation heatmap alone would lead you to the wrong conclusion.
 
-### Data Augmentation (Training Only)
+---
 
-- Random horizontal & vertical flips
-- Random rotation +/-15 degrees
-- Color jitter (brightness & contrast +/-0.2)
-- ImageNet normalization ([0.485, 0.456, 0.406] / [0.229, 0.224, 0.225])
+## What I Learned
+
+- **Data leakage is the #1 trap in ML.** Including `ExamScore` would have given 95%+ accuracy but learned nothing real. Identifying and removing it was the most important decision in the project.
+- **Framing the task correctly changes everything.** The project initially looked like a regression problem. Exploring the data revealed `FinalGrade` has only 4 discrete values — it's a classification problem, and accuracy/F1 are the right metrics, not RMSE.
+- **Pipelines make ML reproducible.** Wrapping preprocessing + model in a scikit-learn `Pipeline` ensures the saved `.pkl` works correctly at inference time without any separate preprocessing step.
+- **Feature importance reveals what matters, not just what correlates.** The Random Forest found strong signal in combinations of features that look uncorrelated individually — something linear methods would miss entirely.
 
 ---
 
 ## Technologies Used
 
-| Tool | Purpose |
-|------|---------|
-| Python 3.14 | Programming language |
-| PyTorch 2.11 | Deep learning framework |
-| TorchVision 0.26 | Pretrained models & transforms |
-| Matplotlib | Confusion matrix visualization |
-| VS Code | Development environment |
-| Mac MPS (Metal) | GPU acceleration |
-
----
-
-## Project Files
-
-| File | Description |
-|------|-------------|
-| `train.py` | Model training with augmentation + early stopping |
-| `predict.py` | Run predictions on single images with confidence scores |
-| `confusion.py` | Generate confusion matrix on validation set |
-| `eye_disease_model.pth` | Saved best model weights (98.2% val accuracy) |
-| `dataset.csv` | Dataset class distribution summary |
-
----
-
-## Key Challenges & Solutions
-
-| Challenge | Solution |
-|-----------|----------|
-| Deeply nested dataset folder structure | Used os.walk() to discover actual image paths |
-| Mac SSL certificate error blocking model download | Ran /Applications/Python 3.14/Install Certificates.command |
-| Overfitting (3% train/val gap in first model) | Added Dropout + data augmentation + early stopping, reduced to 0.8% |
-| Kaggle notebook showing 0 images | Switched to local VS Code workflow with correct path resolution |
+- Python 3.14
+- scikit-learn (Pipeline, RandomForestClassifier, RandomizedSearchCV, StratifiedKFold)
+- pandas, NumPy
+- Matplotlib, Seaborn
+- VS Code + Python virtual environment
 
 ---
 
 ## AI Usage Log
 
-This project was developed with the assistance of Claude (Anthropic) for:
-- Step-by-step guidance on dataset setup and environment configuration
-- Debugging SSL certificate and folder path issues on macOS
-- Writing and iterating on `train.py`, `predict.py`, and `confusion.py`
-- Explaining transfer learning, dropout, and early stopping concepts
-- Generating the confusion matrix visualization
+- **Claude (Anthropic):** Used throughout the project for EDA interpretation, model selection guidance, pipeline code review, identifying the ExamScore leakage issue, and README writing. All code was reviewed, understood, and run locally.
 
-All code was reviewed, run, and validated locally by the student.
+---
+
+## File Structure
+
+```
+MidTerm Project/
+├── README.md                              # This file
+├── student_performance_train.py           # Training script (CLI, fully reusable)
+├── student_performance_classifier.ipynb   # Jupyter notebook walkthrough
+├── MidTerm_Project_Report.docx            # Written report
+└── artifacts/
+    ├── student_performance_model.pkl
+    ├── eda_overview.png
+    ├── confusion_matrix.png
+    └── feature_importance.png
+```
 
 ---
 
 ## References
 
-1. He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep Residual Learning for Image Recognition. *CVPR 2016*. https://arxiv.org/abs/1512.03385
-
-2. Orvile. (2023). *AMDNet23 Macular Degeneration Disease Dataset*. Kaggle. https://www.kaggle.com/datasets/orvile/macular-degeneration-disease-dataset
-
-3. Wong, W. L., et al. (2014). Global prevalence of age-related macular degeneration. *The Lancet Global Health*, 2(2), e106-e116.
-
-4. Ting, D. S. W., et al. (2017). Development and Validation of a Deep Learning System for Diabetic Retinopathy. *JAMA*, 318(22), 2211-2223.
-
-5. PyTorch Team. (2024). *TorchVision Models Documentation*. https://pytorch.org/vision/stable/models.html
+- Shamim, A. (2024). *Student Performance and Learning Behavior Dataset*. Kaggle. https://www.kaggle.com/datasets/adilshamim8/student-performance-and-learning-style
+- Pedregosa, F. et al. (2011). Scikit-learn: Machine Learning in Python. *JMLR*, 12, 2825–2830.
+- Breiman, L. (2001). Random Forests. *Machine Learning*, 45(1), 5–32.
