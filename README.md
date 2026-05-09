@@ -83,7 +83,7 @@ Built a binary image classifier to detect real vs. counterfeit banknotes, helpin
 #### [Eye Disease Classifier](./ComputerVision-ITAI1378/Eye-Disease-Classifier/)
 Built a 4-class retinal image classifier to detect AMD, Cataract, Diabetic Retinopathy, and Normal eyes from fundus photographs — supporting early diagnosis of vision-threatening conditions.
 - **Model:** ResNet18 with Dropout (p=0.4) before the final linear layer
-- **Dataset:** AMDNet23 Fundus Image Dataset · 4 classes: `amd`, `cataract`, `diabetes`, `normal`
+- **Dataset:** [Macular Degeneration Disease Dataset](https://www.kaggle.com/datasets/orvile/macular-degeneration-disease-dataset) · 4 classes: `amd`, `cataract`, `diabetes`, `normal`
 - **Key techniques:** Transfer learning, per-class accuracy analysis, confusion matrix evaluation
 - **Technologies:** Python · PyTorch · Torchvision · matplotlib · NumPy
 
@@ -94,7 +94,7 @@ Built a 4-class retinal image classifier to detect AMD, Cataract, Diabetic Retin
 #### [Student Performance Predictor](./MachineLearning-ITAI1371/Student-Performance-Predictor/)
 Predicted student final grade categories from 14,003 records using 14 behavioral and demographic features, enabling educators to identify at-risk learners before they fall behind.
 - **Model:** Random Forest Classifier with `RandomizedSearchCV` (12 candidates, 3-fold CV)
-- **Dataset:** `student_performance.csv` · 14,003 records · 16 features
+- **Dataset:** [Student Performance and Learning Behavior Dataset](https://www.kaggle.com/datasets/adilshamim8/student-performance-and-learning-style) · 14,003 records · 16 features
 - **Key techniques:** ColumnTransformer pipeline, One-Hot Encoding, feature importance analysis
 - **Technologies:** Python · scikit-learn · pandas · matplotlib · seaborn
 
@@ -110,6 +110,5 @@ Predicted student final grade categories from 14,003 records using 14 behavioral
 
 ## Contact
 
-- **GitHub:** [github.com/VyVo](https://github.com/VyVo)
-- **LinkedIn:** [linkedin.com/in/vy-vo](https://linkedin.com/in/vy-vo)
-- **Email:** vy.vo@student.hccs.edu
+- **GitHub:** [github.com/VyVo](https://github.com/vhkv72)
+- **LinkedIn:** [linkedin.com/in/vy-vo](https://www.linkedin.com/in/vy-v-25a8a026b/)
