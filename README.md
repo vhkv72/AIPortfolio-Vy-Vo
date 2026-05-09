@@ -1,178 +1,115 @@
-# 🎓 Student Performance & Learning Predictor
-
-**Course:** ITAI 1378
-
-**Student:** Vy Vo | Houston City College
+# Vy Vo – Applied AI Portfolio
+**Houston Community College · Applied AI & Robotics Program**
 
 ---
 
-## Problem Statement
+## About Me
 
-Student academic success depends on many overlapping factors — how much a student studies, whether they show up to class, their stress levels, and more. Early identification of at-risk students allows educators to provide targeted support before it's too late.
-
-This project builds a machine learning classifier that predicts a student's **final academic grade** (0–3) using 14 behavioral, motivational, and demographic features — with no access to their exam score. The goal is not just accurate prediction, but understanding *which factors matter most* so that insights can be acted on.
+I am an Applied AI student at Houston Community College specializing in computer vision and machine learning. This portfolio showcases my hands-on project work across the Applied AI & Robotics program, where I built end-to-end AI systems — from raw image datasets to trained, evaluated deep learning models. I am passionate about applying AI to solve problems in healthcare and financial security.
 
 ---
 
-## Approach
-
-| Component | Choice |
-|---|---|
-| ML Technique | Multi-class Classification (4 classes) |
-| Model | Random Forest Classifier |
-| Framework | scikit-learn |
-| Hyperparameter Tuning | RandomizedSearchCV + StratifiedKFold (3-fold) |
-| Compute | Local — VS Code + Python virtual environment |
-
-**Why Random Forest?**
-Random Forest was chosen because it handles non-linear relationships between features, is robust to mixed feature types (numeric + ordinal), and provides built-in feature importance scores — directly supporting the goal of understanding what drives grades.
-
-**Pipeline design:**
-A scikit-learn `Pipeline` bundles preprocessing and the model together so the saved `.pkl` file can make predictions on raw data without any separate preprocessing step.
+## Repository Structure
 
 ```
-Raw CSV
-  → Drop ExamScore (leakage prevention)
-  → Train / Test Split (80/20, stratified)
-  → ColumnTransformer (median imputation + OneHotEncoding)
-  → RandomForestClassifier
-  → RandomizedSearchCV (12 candidates)
-  → Evaluate → Save model + plots
-```
-
----
-
-## Dataset
-
-- **Source:** [Student Performance and Learning Behavior Dataset — Kaggle](https://www.kaggle.com/datasets/adilshamim8/student-performance-and-learning-style)
-- **Size:** 14,003 rows × 16 columns, zero missing values
-- **Features:** StudyHours, Attendance, AssignmentCompletion, Age, OnlineCourses, LearningStyle, StressLevel, Motivation, Resources, Gender, Internet, Extracurricular, Discussions, EduTech
-- **Target:** `FinalGrade` — ordinal label (0 = highest, 3 = lowest)
-- **Key decision:** `ExamScore` was dropped before training. It is a direct numeric encoding of `FinalGrade` (r = −0.97) and would cause data leakage, making the task trivially easy but meaningless.
-
-> The dataset is not uploaded to GitHub due to size. Download it from the Kaggle link above and pass the path via `--data-path`.
-
----
-
-## How to Run
-
-**Requirements:** Python 3.9+
-
-```bash
-# 1. Clone the repo and navigate to this project folder
-cd Projects/MidTerm\ Project
-
-# 2. Create a virtual environment and install dependencies
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-
-# 3. Run full pipeline with hyperparameter tuning (recommended)
-python student_performance_train.py --data-path path/to/student_performance.csv
-
-# 4. Or skip tuning for a faster run
-python student_performance_train.py --data-path path/to/student_performance.csv --no-tuning
-```
-
-Outputs are saved to `artifacts/`:
-```
-artifacts/
-├── student_performance_model.pkl   # Trained pipeline — ready for inference
-├── eda_overview.png                # Class distribution + correlation heatmap
-├── confusion_matrix.png            # Predicted vs. true grades on test set
-└── feature_importance.png          # Top 15 features by importance
+Vy-Vo-AI-Portfolio/
+├── README.md
+├── ComputerVision-ITAI1378/
+│   ├── README.md
+│   ├── Fake-Currency-Detector/
+│   │   ├── README.md
+│   │   ├── Fake_Currency_Detector.ipynb
+│   │   ├── requirements.txt
+│   │   └── results/
+│   │       ├── sample_images.png
+│   │       ├── class_distribution.png
+│   │       ├── accuracy_loss_plot.png
+│   │       ├── confusion_matrix.png
+│   │       └── metrics.json
+│   └── Eye-Disease-Classifier/
+│       ├── README.md
+│       ├── train.py
+│       ├── predict.py
+│       ├── confusion.py
+│       └── results/
+│           └── confusion_matrix.png
+└── MachineLearning-ITAI1371/
+    ├── README.md
+    └── Student-Performance-Predictor/
+        ├── README.md
+        ├── student_performance_classifier.ipynb
+        ├── student_performance_train.py
+        └── results/
+            ├── eda_overview.png
+            ├── feature_importance.png
+            └── confusion_matrix.png
 ```
 
 ---
 
-## Results
+## Technical Skills
 
-| Metric | Value |
-|---|---|
-| **Test Accuracy** | **87.0%** |
-| Baseline (majority class) | 27.4% |
-| Lift over baseline | +59.6 percentage points |
-| Macro Precision | 87.0% |
-| Macro Recall | 87.0% |
-| Macro F1-Score | 87.0% |
+**Deep Learning & Computer Vision**
+- Transfer learning with ResNet18 and ResNet50 (PyTorch / Torchvision)
+- Image classification pipelines: data loading, augmentation, training, evaluation
+- Data augmentation: random flips, rotations, color jitter
+- Regularization: Dropout, AdamW weight decay, cosine annealing LR
+- Early stopping and best-model checkpointing
 
-**Per-class breakdown:**
+**Machine Learning**
+- scikit-learn pipelines with `ColumnTransformer` and `RandomizedSearchCV`
+- Random Forest classification with balanced class weighting
+- Feature importance analysis and EDA visualizations
 
-| Grade | Precision | Recall | F1-Score | Support |
-|---|---|---|---|---|
-| 0 (highest) | 86.9% | 87.1% | 87.0% | 766 |
-| 1 | 87.3% | 85.1% | 86.2% | 662 |
-| 2 | 88.3% | 89.2% | 88.7% | 724 |
-| 3 (lowest) | 85.7% | 86.6% | 86.1% | 649 |
-
-Performance is consistent across all four grade classes — the model does not favor any particular group. Remaining errors are almost entirely between **adjacent grade classes** (e.g., predicting Grade 1 when the true label is Grade 0), which is the expected failure mode for an ordinal target.
+**Tools & Workflow**
+- Python 3 · PyTorch · Torchvision · OpenCV
+- scikit-learn · pandas · NumPy · matplotlib · seaborn
+- Jupyter Notebook · Google Colab
+- GitHub version control
 
 ---
 
-## Key Findings
+## Featured Courses & Projects
 
-**The top 5 features drive the majority of predictive signal:**
+### 🔵 Computer Vision (ITAI 1378)
 
-| Rank | Feature | Importance |
-|---|---|---|
-| 1 | AssignmentCompletion | ~15% |
-| 2 | Attendance | ~14.5% |
-| 3 | OnlineCourses | ~13.5% |
-| 4 | StudyHours | ~13% |
-| 5 | Age | ~11% |
+#### [Fake Currency Detector](./ComputerVision-ITAI1378/Fake-Currency-Detector/)
+Built a binary image classifier to detect real vs. counterfeit banknotes, helping small businesses protect themselves from financial loss without expensive hardware.
+- **Model:** ResNet50 fine-tuned via transfer learning (ImageNet weights)
+- **Dataset:** [Kaggle – Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data) · Labels: `real`, `fake`
+- **Key techniques:** Data augmentation, Dropout, AdamW, cosine annealing LR, early stopping
+- **Technologies:** Python · PyTorch · Torchvision · scikit-learn · matplotlib · Pillow
 
-The three most actionable findings:
-- **Completing assignments matters most.** It's the single strongest predictor — more than attendance or raw study hours.
-- **Showing up is second.** Attendance is nearly as important as assignment completion and more controllable than demographic factors.
-- **Internet access, extracurriculars, and discussions barely matter.** These features had near-zero importance, suggesting they don't meaningfully differentiate grade outcomes in this dataset.
-- **Individual feature correlations are misleading.** Each feature alone has |r| < 0.05 with FinalGrade, yet the model reaches 87% accuracy by learning *combinations* — a clear case where a correlation heatmap alone would lead you to the wrong conclusion.
-
----
-
-## What I Learned
-
-- **Data leakage is the #1 trap in ML.** Including `ExamScore` would have given 95%+ accuracy but learned nothing real. Identifying and removing it was the most important decision in the project.
-- **Framing the task correctly changes everything.** The project initially looked like a regression problem. Exploring the data revealed `FinalGrade` has only 4 discrete values — it's a classification problem, and accuracy/F1 are the right metrics, not RMSE.
-- **Pipelines make ML reproducible.** Wrapping preprocessing + model in a scikit-learn `Pipeline` ensures the saved `.pkl` works correctly at inference time without any separate preprocessing step.
-- **Feature importance reveals what matters, not just what correlates.** The Random Forest found strong signal in combinations of features that look uncorrelated individually — something linear methods would miss entirely.
+#### [Eye Disease Classifier](./ComputerVision-ITAI1378/Eye-Disease-Classifier/)
+Built a 4-class retinal image classifier to detect AMD, Cataract, Diabetic Retinopathy, and Normal eyes from fundus photographs — supporting early diagnosis of vision-threatening conditions.
+- **Model:** ResNet18 with Dropout (p=0.4) before the final linear layer
+- **Dataset:** AMDNet23 Fundus Image Dataset · 4 classes: `amd`, `cataract`, `diabetes`, `normal`
+- **Key techniques:** Transfer learning, per-class accuracy analysis, confusion matrix evaluation
+- **Technologies:** Python · PyTorch · Torchvision · matplotlib · NumPy
 
 ---
 
-## Technologies Used
+### 🟢 Machine Learning (ITAI 1371)
 
-- Python 3.14
-- scikit-learn (Pipeline, RandomForestClassifier, RandomizedSearchCV, StratifiedKFold)
-- pandas, NumPy
-- Matplotlib, Seaborn
-- VS Code + Python virtual environment
-
----
-
-## AI Usage Log
-
-- **Claude (Anthropic):** Used throughout the project for EDA interpretation, model selection guidance, pipeline code review, identifying the ExamScore leakage issue, and README writing. All code was reviewed, understood, and run locally.
+#### [Student Performance Predictor](./MachineLearning-ITAI1371/Student-Performance-Predictor/)
+Predicted student final grade categories from 14,003 records using 14 behavioral and demographic features, enabling educators to identify at-risk learners before they fall behind.
+- **Model:** Random Forest Classifier with `RandomizedSearchCV` (12 candidates, 3-fold CV)
+- **Dataset:** `student_performance.csv` · 14,003 records · 16 features
+- **Key techniques:** ColumnTransformer pipeline, One-Hot Encoding, feature importance analysis
+- **Technologies:** Python · scikit-learn · pandas · matplotlib · seaborn
 
 ---
 
-## File Structure
+## AI Usage Disclosure
 
-```
-MidTerm Project/
-├── README.md                              # This file
-├── student_performance_train.py           # Training script (CLI, fully reusable)
-├── student_performance_classifier.ipynb   # Jupyter notebook walkthrough
-├── MidTerm_Project_Report.docx            # Written report
-└── artifacts/
-    ├── student_performance_model.pkl
-    ├── eda_overview.png
-    ├── confusion_matrix.png
-    └── feature_importance.png
-```
+- **ChatGPT** was used to help organize proposal slides and structure GitHub README files.
+- **Claude** was used to assist with notebook documentation and code structure.
+- All model training decisions, hyperparameter choices, experimental analysis, and conclusions are my own work.
 
 ---
 
-## References
+## Contact
 
-- Shamim, A. (2024). *Student Performance and Learning Behavior Dataset*. Kaggle. https://www.kaggle.com/datasets/adilshamim8/student-performance-and-learning-style
-- Pedregosa, F. et al. (2011). Scikit-learn: Machine Learning in Python. *JMLR*, 12, 2825–2830.
-- Breiman, L. (2001). Random Forests. *Machine Learning*, 45(1), 5–32.
+- **GitHub:** [github.com/VyVo](https://github.com/VyVo)
+- **LinkedIn:** [linkedin.com/in/vy-vo](https://linkedin.com/in/vy-vo)
+- **Email:** vy.vo@student.hccs.edu
