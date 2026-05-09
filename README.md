@@ -1,113 +1,88 @@
-# Vy Vo – Applied AI Portfolio
-**Houston City College · Applied AI & Robotics Program**
+# 💵 Fake Currency Detector
+
+**Course:** ITAI 1378 – Computer Vision  
+**Student:** Vy Vo | Houston Community College  
+**Project Tier:** Tier 1
 
 ---
 
-## About Me
+## Problem Statement
 
-I am an Applied AI student at Houston City College specializing in computer vision and machine learning. This portfolio showcases my hands-on project work across the Applied AI & Robotics program, where I built end-to-end AI systems — from raw image datasets to trained, evaluated deep learning models. I am passionate about applying AI to solve problems in healthcare and financial security.
+Counterfeit money causes significant financial losses for businesses and individuals. Small businesses often lack advanced detection tools. This project builds a practical image classification system using deep learning to help detect fake vs. real currency from a banknote image.
 
----
+## Approach
 
-## Repository Structure
+| Component | Choice |
+|-----------|--------|
+| CV Technique | Image Classification |
+| Model | ResNet50 (Transfer Learning) |
+| Framework | PyTorch |
+| Compute | Google Colab |
+
+**Why ResNet50?** ResNet50's residual connections make it excellent for image classification tasks. Transfer learning from ImageNet allows strong performance even with smaller datasets by leveraging pre-learned visual features.
+
+## Dataset
+
+- **Source:** [Kaggle – Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data)
+- **Labels:** `real`, `fake`
+- **Note:** Download the dataset from Kaggle and place it as:
+  ```
+  data/
+  ├── real/   ← real banknote images
+  └── fake/   ← fake banknote images
+  ```
+- Do **not** upload the dataset to GitHub (Kaggle terms of use).
+
+## How to Run
+
+1. Open `Fake_Currency_Detector.ipynb` in [Google Colab](https://colab.research.google.com/)
+2. Download the dataset from the Kaggle link above and upload to Colab
+3. Run all cells from top to bottom
+4. Results are saved to the `results/` folder
+
+## Results
+
+| Metric | Value | Target |
+|--------|-------|--------|
+| Test Accuracy | ≥ 90% | ≥ 90% |
+| Precision | — | — |
+| Recall | — | — |
+| Inference Speed | < 50 ms | < 1000 ms |
+
+> _Results populate after running the notebook._
+
+## Key Techniques
+
+- **Transfer Learning:** Pretrained ResNet50 (ImageNet weights), fine-tuned on currency images
+- **Data Augmentation:** Random flips, rotations, color jitter to reduce overfitting
+- **Regularization:** Dropout layers + label smoothing + AdamW weight decay
+- **Scheduler:** Cosine annealing LR for smoother convergence
+- **Early Stopping:** Prevents overfitting on small datasets
+
+## Technologies Used
+
+`Python` · `PyTorch` · `Torchvision` · `NumPy` · `Matplotlib` · `Seaborn` · `scikit-learn` · `Pillow` · `Google Colab`
+
+## Results Files (generated after running notebook)
 
 ```
-Vy-Vo-AI-Portfolio/
-├── README.md
-├── ComputerVision-ITAI1378/
-│   ├── README.md
-│   ├── Fake-Currency-Detector/
-│   │   ├── README.md
-│   │   ├── Fake_Currency_Detector.ipynb
-│   │   ├── requirements.txt
-│   │   └── results/
-│   │       ├── sample_images.png
-│   │       ├── class_distribution.png
-│   │       ├── accuracy_loss_plot.png
-│   │       ├── confusion_matrix.png
-│   │       └── metrics.json
-│   └── Eye-Disease-Classifier/
-│       ├── README.md
-│       ├── train.py
-│       ├── predict.py
-│       ├── confusion.py
-│       └── results/
-│           └── confusion_matrix.png
-└── MachineLearning-ITAI1371/
-    ├── README.md
-    └── Student-Performance-Predictor/
-        ├── README.md
-        ├── student_performance_classifier.ipynb
-        ├── student_performance_train.py
-        └── results/
-            ├── eda_overview.png
-            ├── feature_importance.png
-            └── confusion_matrix.png
+results/
+├── sample_images.png          # Grid of training samples
+├── class_distribution.png     # Class balance bar chart
+├── accuracy_loss_plot.png     # Training/validation curves
+├── confusion_matrix.png       # Confusion matrix (counts + normalized)
+├── metrics.json               # Final test metrics
+└── best_model.pth             # Best model weights
 ```
 
----
+## AI Usage Log
 
-## Technical Skills
+- Used **ChatGPT** to help organize the proposal slides and GitHub README.
+- Used **Claude** to structure the notebook and assist with documentation.
+- All model code, training decisions, and analysis are the student's own work.
 
-**Deep Learning & Computer Vision**
-- Transfer learning with ResNet18 and ResNet50 (PyTorch / Torchvision)
-- Image classification pipelines: data loading, augmentation, training, evaluation
-- Data augmentation: random flips, rotations, color jitter
-- Regularization: Dropout, AdamW weight decay, cosine annealing LR
-- Early stopping and best-model checkpointing
+## References
 
-**Machine Learning**
-- scikit-learn pipelines with `ColumnTransformer` and `RandomizedSearchCV`
-- Random Forest classification with balanced class weighting
-- Feature importance analysis and EDA visualizations
-
-**Tools & Workflow**
-- Python 3 · PyTorch · Torchvision · OpenCV
-- scikit-learn · pandas · NumPy · matplotlib · seaborn
-- Jupyter Notebook · Google Colab
-- GitHub version control
-
----
-
-## Featured Courses & Projects
-
-### 🔵 Computer Vision (ITAI 1378)
-
-#### [Fake Currency Detector](./ComputerVision-ITAI1378/Fake-Currency-Detector/)
-Built a binary image classifier to detect real vs. counterfeit banknotes, helping small businesses protect themselves from financial loss without expensive hardware.
-- **Model:** ResNet50 fine-tuned via transfer learning (ImageNet weights)
-- **Dataset:** [Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data) · Labels: `real`, `fake`
-- **Key techniques:** Data augmentation, Dropout, AdamW, cosine annealing LR, early stopping
-- **Technologies:** Python · PyTorch · Torchvision · scikit-learn · matplotlib · Pillow
-
-#### [Eye Disease Classifier](./ComputerVision-ITAI1378/Eye-Disease-Classifier/)
-Built a 4-class retinal image classifier to detect AMD, Cataract, Diabetic Retinopathy, and Normal eyes from fundus photographs — supporting early diagnosis of vision-threatening conditions.
-- **Model:** ResNet18 with Dropout (p=0.4) before the final linear layer
-- **Dataset:** [Macular Degeneration Disease Dataset](https://www.kaggle.com/datasets/orvile/macular-degeneration-disease-dataset) · 4 classes: `amd`, `cataract`, `diabetes`, `normal`
-- **Key techniques:** Transfer learning, per-class accuracy analysis, confusion matrix evaluation
-- **Technologies:** Python · PyTorch · Torchvision · matplotlib · NumPy
-
----
-
-### 🟢 Machine Learning (ITAI 1371)
-
-#### [Student Performance Classifier](./MachineLearning-ITAI1371/Student-Performance-Predictor/)
-Predicted student final grade categories from 14,003 records using 14 behavioral and demographic features, enabling educators to identify at-risk learners before they fall behind.
-- **Model:** Random Forest Classifier with `RandomizedSearchCV` (12 candidates, 3-fold CV)
-- **Dataset:** [Student Performance and Learning Behavior Dataset](https://www.kaggle.com/datasets/adilshamim8/student-performance-and-learning-style) · 14,003 records · 16 features
-- **Key techniques:** ColumnTransformer pipeline, One-Hot Encoding, feature importance analysis
-- **Technologies:** Python · scikit-learn · pandas · matplotlib · seaborn
-
----
-
-## AI Usage Disclosure
-
-- **ChatGPT** was used to help organize proposal slides and structure GitHub README files.
-- **Claude** was used to assist with notebook documentation and code structure.
-- All model training decisions, hyperparameter choices, experimental analysis, and conclusions are my own work.
-
----
-
-## Contact
-
-- **LinkedIn:** [linkedin.com/in/vy-vo](https://www.linkedin.com/in/vy-v-25a8a026b/)
+- Dataset: [Kaggle – Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data)
+- He, K. et al. (2016). Deep Residual Learning for Image Recognition. CVPR 2016.
+- [PyTorch Documentation](https://pytorch.org/docs/)
