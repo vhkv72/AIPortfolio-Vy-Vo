@@ -1,79 +1,11 @@
-# Vy Vo — Applied AI Portfolio
-
-**Program:** Applied AI & Robotics | Houston Community College  
-**GitHub:** [github.com/vhkv72](https://github.com/vhkv72)
+# Vy Vo – Applied AI Portfolio
+**Houston Community College · Applied AI & Robotics Program**
 
 ---
 
 ## About Me
 
-I am an Applied AI student at Houston Community College specializing in computer vision, machine learning, and healthcare AI applications. This portfolio showcases hands-on projects built across multiple AI courses, applying deep learning techniques to real-world classification problems.
-
----
-
-## Technical Skills
-
-**Languages & Frameworks**  
-Python · PyTorch · TensorFlow/Keras · scikit-learn · OpenCV · NumPy · Pandas · Matplotlib · Seaborn
-
-**AI / ML Techniques**  
-Transfer Learning · CNN Architectures (ResNet50, VGG, EfficientNet) · Image Classification · Data Augmentation · Regression & Classification · Feature Engineering · Cross-validation
-
-**Tools & Platforms**  
-Google Colab · Jupyter Notebooks · GitHub · Kaggle · Google Cloud (ADK, BigQuery)
-
----
-
-## Featured Courses & Projects
-
----
-
-### 🖥️ Computer Vision — ITAI 1378
-
-#### [💵 Fake Currency Detector](./ComputerVision-ITAI1378/Fake-Currency-Detector/)
-
-Counterfeit money causes financial losses for small businesses lacking detection tools. Built a binary image classification system to detect real vs. fake banknotes using transfer learning.
-
-- **Model:** ResNet50 (ImageNet pretrained, fine-tuned)
-- **Techniques:** Transfer learning, data augmentation, cosine annealing LR, label smoothing
-- **Target Accuracy:** ≥ 90% on test set
-- **Dataset:** [Kaggle – Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data)
-- **Tech Stack:** PyTorch · Torchvision · scikit-learn · Google Colab
-- 📓 [Open Notebook](./ComputerVision-ITAI1378/Fake-Currency-Detector/Fake_Currency_Detector.ipynb)
-
----
-
-### 🏥 Healthcare AI — Macular Degeneration Detection
-
-#### [👁️ Macular Degeneration Disease Classifier](./MacularDegeneration/)
-
-> ⚠️ **Fill in project details from your other chat conversation.**
-
-Early detection of Age-related Macular Degeneration (AMD) from retinal images using deep learning classification.
-
-- **Model:** *(e.g., EfficientNetB0 / VGG16 — update with your model)*
-- **Techniques:** *(update with your techniques)*
-- **Target Accuracy:** *(update)*
-- **Dataset:** *(add Kaggle/dataset link)*
-- **Tech Stack:** *(update)*
-- 📓 [Open Notebook](./MacularDegeneration/)
-
----
-
-### 📊 Machine Learning — Student Performance Analysis
-
-#### [🎓 Student Performance & Learning Predictor](./StudentPerformance/)
-
-> ⚠️ **Fill in project details from your other chat conversation.**
-
-Predicting student academic performance to help educators identify at-risk students early and personalize interventions.
-
-- **Model:** *(e.g., Random Forest / XGBoost / Neural Network — update)*
-- **Techniques:** *(update with your techniques)*
-- **Target Metric:** *(update — e.g., R² score, accuracy)*
-- **Dataset:** *(add dataset link)*
-- **Tech Stack:** *(update)*
-- 📓 [Open Notebook](./StudentPerformance/)
+I am an Applied AI student at Houston Community College specializing in computer vision and machine learning. This portfolio showcases my hands-on project work across the Applied AI & Robotics program, where I built end-to-end AI systems — from raw image datasets to trained, evaluated deep learning models. I am passionate about applying AI to solve problems in healthcare and financial security.
 
 ---
 
@@ -81,48 +13,103 @@ Predicting student academic performance to help educators identify at-risk stude
 
 ```
 Vy-Vo-AI-Portfolio/
-├── README.md                                    ← You are here
-│
+├── README.md
 ├── ComputerVision-ITAI1378/
-│   └── Fake-Currency-Detector/
-│       ├── README.md
-│       ├── Fake_Currency_Detector.ipynb
-│       └── results/
-│           ├── sample_images.png
-│           ├── class_distribution.png
-│           ├── accuracy_loss_plot.png
-│           └── confusion_matrix.png
-│
-├── MacularDegeneration/
 │   ├── README.md
-│   ├── Macular_Degeneration_Classifier.ipynb
-│   └── results/
-│
-└── StudentPerformance/
+│   ├── Fake-Currency-Detector/
+│   │   ├── README.md
+│   │   ├── Fake_Currency_Detector.ipynb
+│   │   ├── requirements.txt
+│   │   └── results/
+│   │       ├── sample_images.png
+│   │       ├── class_distribution.png
+│   │       ├── accuracy_loss_plot.png
+│   │       ├── confusion_matrix.png
+│   │       └── metrics.json
+│   └── Eye-Disease-Classifier/
+│       ├── README.md
+│       ├── train.py
+│       ├── predict.py
+│       ├── confusion.py
+│       └── results/
+│           └── confusion_matrix.png
+└── MachineLearning-ITAI1371/
     ├── README.md
-    ├── Student_Performance_Predictor.ipynb
-    └── results/
+    └── Student-Performance-Predictor/
+        ├── README.md
+        ├── student_performance_classifier.ipynb
+        ├── student_performance_train.py
+        └── results/
+            ├── eda_overview.png
+            ├── feature_importance.png
+            └── confusion_matrix.png
 ```
 
 ---
 
-## Learning Journey
+## Technical Skills
 
-| Course | Focus Area | Key Skills Gained |
-|--------|-----------|-------------------|
-| ITAI 1378 – Computer Vision | Image Classification | ResNet50, Transfer Learning, PyTorch, Augmentation |
-| Healthcare AI (Macular) | Medical Imaging | CNN classification, class imbalance handling |
-| ML – Student Performance | Tabular ML | Feature engineering, regression/classification, sklearn |
+**Deep Learning & Computer Vision**
+- Transfer learning with ResNet18 and ResNet50 (PyTorch / Torchvision)
+- Image classification pipelines: data loading, augmentation, training, evaluation
+- Data augmentation: random flips, rotations, color jitter
+- Regularization: Dropout, AdamW weight decay, cosine annealing LR
+- Early stopping and best-model checkpointing
+
+**Machine Learning**
+- scikit-learn pipelines with `ColumnTransformer` and `RandomizedSearchCV`
+- Random Forest classification with balanced class weighting
+- Feature importance analysis and EDA visualizations
+
+**Tools & Workflow**
+- Python 3 · PyTorch · Torchvision · OpenCV
+- scikit-learn · pandas · NumPy · matplotlib · seaborn
+- Jupyter Notebook · Google Colab
+- GitHub version control
+
+---
+
+## Featured Courses & Projects
+
+### 🔵 Computer Vision (ITAI 1378)
+
+#### [Fake Currency Detector](./ComputerVision-ITAI1378/Fake-Currency-Detector/)
+Built a binary image classifier to detect real vs. counterfeit banknotes, helping small businesses protect themselves from financial loss without expensive hardware.
+- **Model:** ResNet50 fine-tuned via transfer learning (ImageNet weights)
+- **Dataset:** [Kaggle – Fake Currency Data](https://www.kaggle.com/datasets/mdladla/fake-currency-data) · Labels: `real`, `fake`
+- **Key techniques:** Data augmentation, Dropout, AdamW, cosine annealing LR, early stopping
+- **Technologies:** Python · PyTorch · Torchvision · scikit-learn · matplotlib · Pillow
+
+#### [Eye Disease Classifier](./ComputerVision-ITAI1378/Eye-Disease-Classifier/)
+Built a 4-class retinal image classifier to detect AMD, Cataract, Diabetic Retinopathy, and Normal eyes from fundus photographs — supporting early diagnosis of vision-threatening conditions.
+- **Model:** ResNet18 with Dropout (p=0.4) before the final linear layer
+- **Dataset:** AMDNet23 Fundus Image Dataset · 4 classes: `amd`, `cataract`, `diabetes`, `normal`
+- **Key techniques:** Transfer learning, per-class accuracy analysis, confusion matrix evaluation
+- **Technologies:** Python · PyTorch · Torchvision · matplotlib · NumPy
+
+---
+
+### 🟢 Machine Learning (ITAI 1371)
+
+#### [Student Performance Predictor](./MachineLearning-ITAI1371/Student-Performance-Predictor/)
+Predicted student final grade categories from 14,003 records using 14 behavioral and demographic features, enabling educators to identify at-risk learners before they fall behind.
+- **Model:** Random Forest Classifier with `RandomizedSearchCV` (12 candidates, 3-fold CV)
+- **Dataset:** `student_performance.csv` · 14,003 records · 16 features
+- **Key techniques:** ColumnTransformer pipeline, One-Hot Encoding, feature importance analysis
+- **Technologies:** Python · scikit-learn · pandas · matplotlib · seaborn
+
+---
+
+## AI Usage Disclosure
+
+- **ChatGPT** was used to help organize proposal slides and structure GitHub README files.
+- **Claude** was used to assist with notebook documentation and code structure.
+- All model training decisions, hyperparameter choices, experimental analysis, and conclusions are my own work.
 
 ---
 
 ## Contact
 
-- 📧 Email: *(add your email)*
-- 💼 LinkedIn: *(add your LinkedIn)*
-- 🐙 GitHub: [github.com/vhkv72](https://github.com/vhkv72)
-
----
-
-*This portfolio was built as part of the Applied AI & Robotics program at Houston Community College.*  
-*AI tools (ChatGPT, Claude) were used to assist with documentation and code structuring. All model implementations and analyses are the student's own work.*
+- **GitHub:** [github.com/VyVo](https://github.com/VyVo)
+- **LinkedIn:** [linkedin.com/in/vy-vo](https://linkedin.com/in/vy-vo)
+- **Email:** vy.vo@student.hccs.edu
